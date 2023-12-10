@@ -16,6 +16,7 @@ export function Input({
     error,
     helperText,
     type,
+    sx,
 }) {
     return (
         <Grid item xs={12} sm={sm}>
@@ -33,6 +34,7 @@ export function Input({
                 error={error}
                 helperText={helperText}
                 type={type}
+                sx={sx}
             />
         </Grid>
     );

@@ -15,6 +15,12 @@ export class NoteAPI {
         });
     }
 
+    static getNote(noteId) {
+        return axios.get(`${this.notesEndpoint}${noteId}`, {
+            withCredentials: true,
+        });
+    }
+
     static deleteNote(noteId) {
         return axios.delete(`${this.notesEndpoint}${noteId}`, {
             headers: {
@@ -26,6 +32,15 @@ export class NoteAPI {
 
     static editNote(noteId, data) {
         return axios.put(`${this.notesEndpoint}${noteId}`, data, {
+            headers: {
+                "X-CSRF-Token": new Cookies().get("csrf_access_token"),
+            },
+            withCredentials: true,
+        });
+    }
+
+    static createNote(data) {
+        return axios.post(this.notesEndpoint, data, {
             headers: {
                 "X-CSRF-Token": new Cookies().get("csrf_access_token"),
             },

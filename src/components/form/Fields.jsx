@@ -11,6 +11,7 @@ export function Fields({ fields, formik }) {
             label={field.label}
             sm={field.sm}
             onChange={formik.handleChange}
+            sx={field.sx}
             onBlur={formik.handleBlur}
             value={formik.values[field.id]}
             error={!!(formik.touched[field.id] && formik.errors[field.id])}

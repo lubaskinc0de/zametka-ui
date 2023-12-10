@@ -1,7 +1,7 @@
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 
-import { Fields } from "../../Fields.jsx";
+import { Fields } from "../../../form/Fields.jsx";
 import { AuthButton } from "../../AuthButton.jsx";
 import { APIErrors } from "../../../general/APIErrors";
 

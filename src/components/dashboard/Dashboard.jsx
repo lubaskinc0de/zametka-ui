@@ -8,10 +8,11 @@ import { Stack } from "@mui/material";
 import { NoteList } from "./note/NoteList.jsx";
 import { DeleteNote } from "./note/DeleteNote.jsx";
 import { EditNote } from "./note/EditNote.jsx";
-import { ThemeSwitcher } from "./ThemeSwitcher.jsx";
-import Typography from "@mui/material/Typography";
 import { useSelector } from "react-redux";
 import { isEmpty } from "../../lib/lib.js";
+import { Brand } from "./Brand.jsx";
+import { AddNoteButton } from "./note/AddNoteButton.jsx";
+import { CreateNoteDialog } from "./note/CreateNoteDialog.jsx";
 
 const border = {
     borderColor: "divider.main",
@@ -99,13 +100,18 @@ export function Dashboard() {
                                 ...sectionBorder,
                             }}
                             pr={2}
+                            pl={1}
                             display="flex"
                             justifyContent="space-between"
                             alignItems="center"
                             xs={12}
                         >
-                            <Typography variant="h5">zametka</Typography>
-                            <DeleteNote></DeleteNote>
+                            <AddNoteButton></AddNoteButton>
+                            <CreateNoteDialog></CreateNoteDialog>
+                            <Brand></Brand>
+                            {!isEmpty(selectedNote) ? (
+                                <DeleteNote></DeleteNote>
+                            ) : null}
                         </Grid>
                         <Grid
                             height="92%"

@@ -1,6 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { deleteNote, editNote, getNotes } from "../actions/note.js";
+import {
+    deleteNote,
+    editNote,
+    getNotes,
+    createNote,
+    getNote,
+} from "../actions/note.js";
 
 const initialState = {
     notes: [],
@@ -12,6 +18,8 @@ const initialState = {
     hasNext: null,
     selectedNote: {},
     pendingNoteId: null,
+    isDialogOpen: false,
+    pendingCreate: null,
 };
 
 const noteSlice = createSlice({
@@ -30,8 +38,13 @@ const noteSlice = createSlice({
 
             state.search = search;
         },
-        selectNote(state, action) {
-            state.selectedNote = action.payload;
+
+        unselectNote(state) {
+            state.selectedNote = null;
+        },
+
+        switchDialogOpen(state) {
+            state.isDialogOpen = !state.isDialogOpen;
         },
     },
 
@@ -59,6 +72,19 @@ const noteSlice = createSlice({
             state.rejected = true;
         },
 
+        [getNote.pending](state, action) {
+            state.pendingNoteId = action.meta.arg.noteId;
+        },
+
+        [getNote.fulfilled](state, action) {
+            state.selectedNote = action.payload.note;
+            state.pendingNoteId = null;
+        },
+
+        [getNote.rejected](state) {
+            state.pendingNoteId = null;
+        },
+
         [deleteNote.fulfilled](state, action) {
             const { noteId } = action.payload;
 
@@ -82,9 +108,29 @@ const noteSlice = createSlice({
 
             state.pendingNoteId = null;
         },
+
+        [editNote.rejected](state) {
+            state.pendingNoteId = null;
+        },
+
+        [createNote.pending](state) {
+            state.pendingCreate = true;
+        },
+
+        [createNote.fulfilled](state, action) {
+            const { note } = action.payload;
+
+            state.notes.unshift(note);
+
+            state.pendingCreate = false;
+        },
+
+        [createNote.rejected](state) {
+            state.pendingCreate = false;
+        },
     },
 });
 
-export const { setSearch, selectNote } = noteSlice.actions;
+export const { setSearch, unselectNote, switchDialogOpen } = noteSlice.actions;
 
 export default noteSlice.reducer;

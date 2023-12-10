@@ -6,10 +6,10 @@ const baseUrl = import.meta.env.VITE_BACKEND_URL;
  * API for the authentication part
  */
 export class AuthAPI {
-    static registerEndpoint = baseUrl + "/auth/sign-up";
-    static loginEndpoint = baseUrl + "/auth/sign-in";
-    static emailVerificationEndpoint = baseUrl + "/auth/verify/";
-    static whoamiEndpoint = baseUrl + "/auth/whoami/";
+    static registerEndpoint = baseUrl + "/user/sign-up";
+    static loginEndpoint = baseUrl + "/user/sign-in";
+    static emailVerificationEndpoint = baseUrl + "/user/verify/";
+    static whoamiEndpoint = baseUrl + "/user/whoami/";
 
     static register(data) {
         return axios.post(this.registerEndpoint, data);

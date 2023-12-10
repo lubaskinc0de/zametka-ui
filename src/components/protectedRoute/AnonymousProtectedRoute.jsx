@@ -17,7 +17,7 @@ export function AnonymousProtectedRoute() {
         }
     }, []);
 
-    return userInfo.first_name ||
+    return userInfo.firstName !== null ||
         getUserInfoPending ||
         getUserInfoPending === null ? (
         <LoadingContainer isLoading></LoadingContainer>

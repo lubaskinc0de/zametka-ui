@@ -5,7 +5,7 @@ import Box from "@mui/material/Box";
 
 import { AuthButton } from "../../AuthButton";
 
-import { Fields } from "../../Fields.jsx";
+import { Fields } from "../../../form/Fields.jsx";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";

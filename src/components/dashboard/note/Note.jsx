@@ -1,9 +1,10 @@
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { useDispatch, useSelector } from "react-redux";
-import { selectNote } from "../../../store/slices/note.js";
+import { unselectNote } from "../../../store/slices/note.js";
 import { ColorMode } from "../../../store/slices/globalSettings.js";
 import { CircularProgress, Stack } from "@mui/material";
+import { getNote } from "../../../store/actions/note.js";
 
 export function Note({ style, note }) {
     const dispatch = useDispatch();
@@ -31,9 +32,9 @@ export function Note({ style, note }) {
             }}
             onClick={() => {
                 if (selectedNote.note_id !== note.note_id) {
-                    dispatch(selectNote(note));
+                    dispatch(getNote(note.note_id));
                 } else {
-                    dispatch(selectNote({}));
+                    dispatch(unselectNote({}));
                 }
             }}
         >

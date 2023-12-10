@@ -60,12 +60,60 @@ export const deleteNote = createAsyncThunk(
     }
 );
 
+export const getNote = createAsyncThunk(
+    "notes/getNote",
+    async (noteId, { rejectWithValue, dispatch }) => {
+        try {
+            const response = await NoteAPI.getNote(noteId);
+            const note = response.data;
+
+            return {
+                note,
+            };
+        } catch (err) {
+            const APIErrors = parseErrors(err);
+
+            dispatch(
+                setAPIErrors({
+                    APIErrors,
+                })
+            );
+
+            return rejectWithValue();
+        }
+    }
+);
+
 export const editNote = createAsyncThunk(
     "notes/editNote",
     async (data, { rejectWithValue, dispatch }) => {
         try {
             const response = await NoteAPI.editNote(data.noteId, data.note);
-            const note = response.data.note;
+            const note = response.data;
+
+            return {
+                note: note,
+            };
+        } catch (err) {
+            const APIErrors = parseErrors(err);
+
+            dispatch(
+                setAPIErrors({
+                    APIErrors,
+                })
+            );
+
+            return rejectWithValue();
+        }
+    }
+);
+
+export const createNote = createAsyncThunk(
+    "notes/createNote",
+    async (data, { rejectWithValue, dispatch }) => {
+        try {
+            const response = await NoteAPI.createNote(data);
+            const note = response.data;
 
             return {
                 note: note,

@@ -26,7 +26,7 @@ export const parseErrors = (error) => {
         if (error.response.data.detail) {
             return Array.isArray(error.response.data.detail)
                 ? response.data.detail.map((val) => val.msg)
-                : error.response.data.detail;
+                : [error.response.data.detail];
         }
     }
 

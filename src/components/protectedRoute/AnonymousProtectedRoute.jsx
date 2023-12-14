@@ -15,7 +15,7 @@ export function AnonymousProtectedRoute() {
         if (userInfo.firstName && !getUserInfoPending) {
             navigate(AUTHORIZED_REDIRECT);
         }
-    }, []);
+    }, [userInfo]);
 
     return userInfo.firstName !== null ||
         getUserInfoPending ||

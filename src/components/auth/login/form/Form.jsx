@@ -69,7 +69,11 @@ export function Form() {
             sx={{ mt: 3 }}
             onSubmit={formik.handleSubmit}
         >
-            <APIErrors mb={3}></APIErrors>
+            <APIErrors
+                sx={{
+                    mb: 3,
+                }}
+            ></APIErrors>
             <Grid container spacing={2}>
                 <Fields formik={formik} fields={fields}></Fields>
             </Grid>

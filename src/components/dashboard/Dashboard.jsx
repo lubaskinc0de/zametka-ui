@@ -11,8 +11,9 @@ import { EditNote } from "./note/EditNote.jsx";
 import { useSelector } from "react-redux";
 import { isEmpty } from "../../lib/lib.js";
 import { Brand } from "./Brand.jsx";
-import { AddNoteButton } from "./note/AddNoteButton.jsx";
+import { NoteActions } from "./note/NoteActions.jsx";
 import { CreateNoteDialog } from "./note/CreateNoteDialog.jsx";
+import { EditNoteDialog } from "./note/EditNoteDialog.jsx";
 
 const border = {
     borderColor: "divider.main",
@@ -27,7 +28,9 @@ const sectionBorder = {
 };
 
 export function Dashboard() {
-    const { selectedNote } = useSelector((state) => state.notes);
+    const { selectedNote, isDialogOpen, isEditDialogOpen } = useSelector(
+        (state) => state.notes
+    );
 
     return (
         <Grid
@@ -106,9 +109,14 @@ export function Dashboard() {
                             alignItems="center"
                             xs={12}
                         >
-                            <AddNoteButton></AddNoteButton>
-                            <CreateNoteDialog></CreateNoteDialog>
-                            <Brand></Brand>
+                            <NoteActions></NoteActions>
+                            {isDialogOpen ? (
+                                <CreateNoteDialog></CreateNoteDialog>
+                            ) : isEditDialogOpen ? (
+                                <EditNoteDialog></EditNoteDialog>
+                            ) : (
+                                <Brand></Brand>
+                            )}
                             {!isEmpty(selectedNote) ? (
                                 <DeleteNote></DeleteNote>
                             ) : null}

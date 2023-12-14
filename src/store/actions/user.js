@@ -39,15 +39,11 @@ export const userLogin = createAsyncThunk(
 
     async (userData, { dispatch, rejectWithValue }) => {
         try {
-            const navigate = userData.navigate;
-
-            delete userData.navigate;
-
-            await AuthAPI.login(userData);
+            const response = await AuthAPI.login(userData);
 
             dispatch(clearAPIErrors());
 
-            navigate("/");
+            return response.data;
         } catch (err) {
             const errors = parseErrors(err);
 

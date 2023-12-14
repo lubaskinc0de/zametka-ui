@@ -6,6 +6,7 @@ import {
     userEmailVerification,
     getUserInfo,
 } from "../actions/user.js";
+
 import Cookies from "universal-cookie";
 
 const initialState = {
@@ -42,8 +43,14 @@ const userSlice = createSlice({
             state.loading = true;
         },
 
-        [userLogin.fulfilled](state) {
+        [userLogin.fulfilled](state, action) {
             state.loading = false;
+
+            state.userInfo.firstName = action.payload.first_name;
+            state.userInfo.lastName = action.payload.last_name;
+            state.userInfo.joinedAt = action.payload.joined_at;
+
+            state.getUserInfoErrorCode = initialState.getUserInfoErrorCode;
         },
 
         [userLogin.rejected](state) {
@@ -77,6 +84,13 @@ const userSlice = createSlice({
             state.getUserInfoPending = false;
 
             state.getUserInfoErrorCode = action.payload.errorCode;
+
+            if (state.getUserInfoErrorCode === 401) {
+                const cookie = new Cookies();
+
+                cookie.remove("csrf_access_token");
+                cookie.remove("access_token_cookie");
+            }
         },
     },
 });

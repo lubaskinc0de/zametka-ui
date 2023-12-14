@@ -97,7 +97,6 @@ export function Form() {
                 password2: values.password2,
                 first_name: values.firstName,
                 last_name: values.lastName,
-                navigate,
             };
 
             dispatch(userRegister(userData));
@@ -111,7 +110,11 @@ export function Form() {
             noValidate
             sx={{ mt: 3 }}
         >
-            <APIErrors mb={3}></APIErrors>
+            <APIErrors
+                sx={{
+                    mb: 3,
+                }}
+            ></APIErrors>
             <Grid container spacing={2}>
                 <Fields formik={formik} fields={fields}></Fields>
             </Grid>

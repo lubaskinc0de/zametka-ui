@@ -34,7 +34,7 @@ export function Note({ style, note }) {
                 if (selectedNote.note_id !== note.note_id) {
                     dispatch(getNote(note.note_id));
                 } else {
-                    dispatch(unselectNote({}));
+                    dispatch(unselectNote());
                 }
             }}
         >

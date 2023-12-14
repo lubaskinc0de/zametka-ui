@@ -8,7 +8,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 import { shiftAPIErrors } from "../../store/slices/APIErrors";
 
-export function APIErrors({ mb }) {
+export function APIErrors({ sx }) {
     const dispatch = useDispatch();
     const APIErrorsList = useSelector((state) => state.APIErrors.APIErrors);
 
@@ -17,7 +17,7 @@ export function APIErrors({ mb }) {
     };
 
     return APIErrorsList && APIErrorsList.length ? (
-        <Box mb={mb}>
+        <Box sx={sx}>
             <Grid item xs={12}>
                 <Alert onClose={handleClose} severity="error">
                     {APIErrorsList[0]}

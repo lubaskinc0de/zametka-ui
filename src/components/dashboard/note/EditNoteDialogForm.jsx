@@ -7,7 +7,7 @@ import Button from "@mui/material/Button";
 import DialogActions from "@mui/material/DialogActions";
 import LoadingButton from "@mui/lab/LoadingButton";
 import { useDispatch, useSelector } from "react-redux";
-import { createNote } from "../../../store/actions/note.js";
+import { editNote } from "../../../store/actions/note.js";
 import Grid from "@mui/material/Grid";
 import { Fields } from "../../form/Fields.jsx";
 
@@ -15,7 +15,7 @@ const fields = [
     {
         name: "noteTitle",
         id: "noteTitle",
-        label: "Название заметки",
+        label: "Новое название заметки",
         type: "text",
         sx: {
             margin: "dense",
@@ -26,17 +26,20 @@ const fields = [
 
 const validationSchema = Yup.object({
     noteTitle: Yup.string()
-        .max(40, "Название заметки не должно насчитывать больше 50 символов.")
+        .max(
+            40,
+            "Новое название заметки не должно насчитывать больше 50 символов."
+        )
         .required("Это поле обязательно!"),
 });
 
-export function CreateNoteDialogForm({ handleClose }) {
-    const { pendingCreate } = useSelector((state) => state.notes);
+export function EditNoteDialogForm({ handleClose }) {
+    const { pendingNoteId, selectedNote } = useSelector((state) => state.notes);
     const dispatch = useDispatch();
 
     const formik = useFormik({
         initialValues: {
-            noteTitle: "",
+            noteTitle: selectedNote.title,
         },
 
         validationSchema,
@@ -46,7 +49,10 @@ export function CreateNoteDialogForm({ handleClose }) {
                 title: values.noteTitle,
             };
 
-            dispatch(createNote(note));
+            dispatch(editNote({
+                noteId: selectedNote.note_id,
+                note,
+            }));
         },
     });
 
@@ -54,8 +60,7 @@ export function CreateNoteDialogForm({ handleClose }) {
         <>
             <DialogContent>
                 <DialogContentText>
-                    Придумайте название для вашей заметки, возможно, это начало
-                    новой истории.
+                    Тут вы можете изменить название вашей заметки
                 </DialogContentText>
                 <Grid container spacing={2}>
                     <Fields formik={formik} fields={fields}></Fields>
@@ -71,10 +76,10 @@ export function CreateNoteDialogForm({ handleClose }) {
                         formik.handleSubmit(e);
                         handleClose();
                     }}
-                    loading={pendingCreate}
+                    loading={pendingNoteId === selectedNote.note_id}
                     variant="text"
                 >
-                    Создать
+                    Изменить
                 </LoadingButton>
             </DialogActions>
         </>

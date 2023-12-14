@@ -19,6 +19,7 @@ const initialState = {
     selectedNote: {},
     pendingNoteId: null,
     isDialogOpen: false,
+    isEditDialogOpen: false,
     pendingCreate: null,
 };
 
@@ -40,11 +41,15 @@ const noteSlice = createSlice({
         },
 
         unselectNote(state) {
-            state.selectedNote = null;
+            state.selectedNote = {};
         },
 
         switchDialogOpen(state) {
             state.isDialogOpen = !state.isDialogOpen;
+        },
+
+        switchEditDialogOpen(state) {
+            state.isEditDialogOpen = !state.isEditDialogOpen;
         },
     },
 
@@ -106,6 +111,10 @@ const noteSlice = createSlice({
                 return el;
             });
 
+            if (note.note_id === state.selectedNote.note_id) {
+                state.selectedNote = note;
+            }
+
             state.pendingNoteId = null;
         },
 
@@ -131,6 +140,11 @@ const noteSlice = createSlice({
     },
 });
 
-export const { setSearch, unselectNote, switchDialogOpen } = noteSlice.actions;
+export const {
+    setSearch,
+    unselectNote,
+    switchDialogOpen,
+    switchEditDialogOpen,
+} = noteSlice.actions;
 
 export default noteSlice.reducer;

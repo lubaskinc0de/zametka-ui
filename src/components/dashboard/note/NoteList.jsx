@@ -11,6 +11,7 @@ export function NoteList() {
         pending,
         notes: data,
         hasNext,
+        search,
     } = useSelector((state) => state.notes);
 
     const dispatch = useDispatch();
@@ -28,7 +29,7 @@ export function NoteList() {
 
     useEffect(() => {
         dispatch(getNotes());
-    }, []);
+    }, [search]);
 
     useEffect(() => {
         const [lastItem] = [...rowVirtualizer.getVirtualItems()].reverse();

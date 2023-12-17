@@ -42,7 +42,6 @@ const validationSchema = Yup.object({
 
 export function Form() {
     const dispatch = useDispatch();
-    const navigate = useNavigate();
 
     const formik = useFormik({
         initialValues: {
@@ -55,7 +54,6 @@ export function Form() {
             const userData = {
                 email: values.email,
                 password: values.password,
-                navigate: navigate,
             };
 
             dispatch(userLogin(userData));

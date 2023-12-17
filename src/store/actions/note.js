@@ -12,8 +12,11 @@ export const getNotes = createAsyncThunk(
 
             const limit = notesState.limit;
             const offset = notesState.offset;
+            const search = notesState.search;
 
-            const urlParameters = `limit=${limit}&offset=${offset}`;
+            const urlParameters = `limit=${limit}&offset=${offset}${
+                search ? `&search=` + search : ""
+            }`;
 
             const response = await NoteAPI.getNotes(urlParameters);
             const notes = response.data.notes;

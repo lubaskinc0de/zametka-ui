@@ -89,7 +89,6 @@ const userSlice = createSlice({
                 const cookie = new Cookies();
 
                 cookie.remove("csrf_access_token");
-                cookie.remove("access_token_cookie");
             }
         },
     },

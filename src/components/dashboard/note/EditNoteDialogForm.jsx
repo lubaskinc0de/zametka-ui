@@ -27,7 +27,7 @@ const fields = [
 const validationSchema = Yup.object({
     noteTitle: Yup.string()
         .max(
-            40,
+            50,
             "Новое название заметки не должно насчитывать больше 50 символов."
         )
         .required("Это поле обязательно!"),
@@ -49,10 +49,12 @@ export function EditNoteDialogForm({ handleClose }) {
                 title: values.noteTitle,
             };
 
-            dispatch(editNote({
-                noteId: selectedNote.note_id,
-                note,
-            }));
+            dispatch(
+                editNote({
+                    noteId: selectedNote.note_id,
+                    note,
+                })
+            );
         },
     });
 

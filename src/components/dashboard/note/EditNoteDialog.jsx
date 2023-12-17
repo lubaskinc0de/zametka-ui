@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
 import { switchEditDialogOpen } from "../../../store/slices/note.js";
-import {EditNoteDialogForm} from "./EditNoteDialogForm.jsx";
+import { EditNoteDialogForm } from "./EditNoteDialogForm.jsx";
 
 export function EditNoteDialog() {
     const { isEditDialogOpen } = useSelector((state) => state.notes);
@@ -19,7 +19,9 @@ export function EditNoteDialog() {
         <form noValidate>
             <Dialog open={isEditDialogOpen} onClose={handleClose}>
                 <DialogTitle>Переименовать заметку</DialogTitle>
-                <EditNoteDialogForm handleClose={handleClose}></EditNoteDialogForm>
+                <EditNoteDialogForm
+                    handleClose={handleClose}
+                ></EditNoteDialogForm>
             </Dialog>
         </form>
     );

@@ -17,6 +17,7 @@ export function Input({
     helperText,
     type,
     sx,
+    size,
 }) {
     return (
         <Grid item xs={12} sm={sm}>
@@ -31,6 +32,7 @@ export function Input({
                 onChange={onChange}
                 onBlur={onBlur}
                 value={value}
+                size={size}
                 error={error}
                 helperText={helperText}
                 type={type}

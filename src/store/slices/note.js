@@ -12,7 +12,7 @@ const initialState = {
     notes: [],
     pending: null,
     rejected: null,
-    search: null,
+    search: "",
     limit: 100,
     offset: 0,
     hasNext: null,
@@ -28,13 +28,14 @@ const noteSlice = createSlice({
     initialState,
     reducers: {
         setSearch(state, action) {
-            const { search } = action.payload;
+            const search = action.payload;
 
             if (search !== state.search) {
                 // refresh
 
                 state.notes = [];
                 state.nextPage = initialState.nextPage;
+                state.offset = initialState.offset;
             }
 
             state.search = search;

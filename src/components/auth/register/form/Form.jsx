@@ -97,6 +97,7 @@ export function Form() {
                 password2: values.password2,
                 first_name: values.firstName,
                 last_name: values.lastName,
+                navigate,
             };
 
             dispatch(userRegister(userData));

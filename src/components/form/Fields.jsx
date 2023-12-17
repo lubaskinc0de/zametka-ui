@@ -9,8 +9,9 @@ export function Fields({ fields, formik }) {
             autocomplete={field.autocomplete}
             id={field.id}
             label={field.label}
+            size={field.size}
             sm={field.sm}
-            onChange={formik.handleChange}
+            onChange={field.onChange || formik.handleChange}
             sx={field.sx}
             onBlur={formik.handleBlur}
             value={formik.values[field.id]}

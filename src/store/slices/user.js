@@ -45,11 +45,6 @@ const userSlice = createSlice({
 
         [userLogin.fulfilled](state, action) {
             state.loading = false;
-
-            state.userInfo.firstName = action.payload.first_name;
-            state.userInfo.lastName = action.payload.last_name;
-            state.userInfo.joinedAt = action.payload.joined_at;
-
             state.getUserInfoErrorCode = initialState.getUserInfoErrorCode;
         },
 

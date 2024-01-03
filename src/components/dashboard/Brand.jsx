@@ -8,8 +8,7 @@ export function Brand() {
     return APIErrorsList && APIErrorsList.length ? (
         <APIErrors
             sx={{
-                maxWidth: "500px",
-                width: "100%",
+                maxWidth: "100%",
             }}
         ></APIErrors>
     ) : (

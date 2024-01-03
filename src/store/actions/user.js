@@ -39,11 +39,9 @@ export const userLogin = createAsyncThunk(
 
     async (userData, { dispatch, rejectWithValue }) => {
         try {
-            const response = await AuthAPI.login(userData);
-
+            await AuthAPI.login(userData);
             dispatch(clearAPIErrors());
-
-            return response.data;
+            dispatch(getUserInfo())
         } catch (err) {
             const errors = parseErrors(err);
 

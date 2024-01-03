@@ -8,16 +8,18 @@ import {
     switchDialogOpen,
     switchEditDialogOpen,
 } from "../../../store/slices/note.js";
-import { Tooltip } from "@mui/material";
+import {CircularProgress, Tooltip} from "@mui/material";
+import Box from "@mui/material/Box";
 
 export function NoteActions() {
     const dispatch = useDispatch();
 
-    const { selectedNote } = useSelector((state) => state.notes);
+    const { selectedNote, pendingCreate } = useSelector((state) => state.notes);
 
     return (
         <Stack direction="row" spacing={1}>
             <Tooltip title="Создать заметку">
+                {!pendingCreate ?
                 <IconButton
                     aria-label="Создать заметку"
                     onClick={() => {
@@ -26,6 +28,10 @@ export function NoteActions() {
                 >
                     <NoteAddIcon></NoteAddIcon>
                 </IconButton>
+                    : <Box pl={1} pt={0.5}>
+                        <CircularProgress size={18}></CircularProgress>
+                    </Box>
+                }
             </Tooltip>
 
             {selectedNote.title ? (

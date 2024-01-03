@@ -1,15 +1,16 @@
 import axios from "axios";
 
-const baseUrl = import.meta.env.VITE_BACKEND_URL;
+const baseUrl = import.meta.env.VITE_USERS_URL;
+const notesUrl = import.meta.env.VITE_NOTES_URL;
 
 /**
  * API for the authentication part
  */
 export class AuthAPI {
-    static registerEndpoint = baseUrl + "/user/sign-up";
-    static loginEndpoint = baseUrl + "/user/sign-in";
-    static emailVerificationEndpoint = baseUrl + "/user/verify/";
-    static whoamiEndpoint = baseUrl + "/user/whoami/";
+    static registerEndpoint = baseUrl + "/";
+    static loginEndpoint = baseUrl + "/authorize";
+    static emailVerificationEndpoint = baseUrl + "/verify/";
+    static whoamiEndpoint = notesUrl + "/users/me";
 
     static register(data) {
         return axios.post(this.registerEndpoint, data);
